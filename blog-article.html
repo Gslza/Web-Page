@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Why I ditched heavy CSS frameworks for Tailwind — Eliott's blog"/>
-  <meta name="author" content="Eliott"/>
-  <meta property="og:title" content="Why I ditched heavy CSS frameworks for Tailwind — Eliott"/>
+  <meta name="description" content="Membangun Sistem Deteksi Botol Minuman Menggunakan YOLO11 dan OCR — Gusli Yanza's blog"/>
+  <meta name="author" content="Gusli Yanza"/>
+  <meta property="og:title" content="Membangun Sistem Deteksi Botol Minuman Menggunakan YOLO11 dan OCR — Gusli Yanza"/>
   <meta property="og:type" content="article"/>
-  <title>Why I ditched heavy CSS frameworks for Tailwind — Eliott</title>
+  <title>Membangun Sistem Deteksi Botol Minuman Menggunakan YOLO11 dan OCR — Gusli Yanza</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -71,21 +71,21 @@
     :class="scrolled?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':'bg-transparent'">
     <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" aria-label="Main navigation">
       <a href="index.html" class="font-display font-bold text-xl tracking-tight z-10">
-        <span class="text-zinc-900 dark:text-white">eli</span><span class="text-accent">ott</span>
+        <span class="text-zinc-900 dark:text-white">gusli</span><span class="text-accent">.dev</span>
       </a>
       <ul class="hidden md:flex items-center gap-8 text-sm font-medium" role="list">
-        <li><a href="index.html#services" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Services</a></li>
-        <li><a href="projects.html" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Work</a></li>
-        <li><a href="index.html#about" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">About</a></li>
+        <li><a href="index.html#services" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Keahlian</a></li>
+        <li><a href="projects.html" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Project</a></li>
+        <li><a href="index.html#about" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Tentang</a></li>
         <li><a href="blog.html" class="nav-link text-accent font-medium">Blog</a></li>
-        <li><a href="index.html#contact" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a></li>
+        <li><a href="index.html#contact" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Kontak</a></li>
       </ul>
       <div class="flex items-center gap-3">
         <button @click="dark=!dark" class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" :aria-label="dark?'Light mode':'Dark mode'">
           <svg x-show="!dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
           <svg x-show="dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
         </button>
-        <a href="index.html#contact" class="hidden md:inline-flex items-center gap-2 btn-primary bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">Hire me →</a>
+        <a href="index.html#contact" class="hidden md:inline-flex items-center gap-2 btn-primary bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">Hubungi Saya →</a>
         <button @click="mobileMenu=!mobileMenu" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800" aria-label="Toggle menu">
           <svg x-show="!mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
           <svg x-show="mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -94,11 +94,11 @@
     </nav>
     <div x-show="mobileMenu" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2" class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
       <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium" role="list">
-        <li><a href="index.html#services" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Services</a></li>
-        <li><a href="projects.html" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Work</a></li>
-        <li><a href="index.html#about" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">About</a></li>
+        <li><a href="index.html#services" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Keahlian</a></li>
+        <li><a href="projects.html" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Project</a></li>
+        <li><a href="index.html#about" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Tentang</a></li>
         <li><a href="blog.html" class="block text-accent font-medium">Blog</a></li>
-        <li><a href="index.html#contact" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Contact</a></li>
+        <li><a href="index.html#contact" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Kontak</a></li>
       </ul>
     </div>
   </header>
@@ -110,26 +110,26 @@
       <header class="pt-32 pb-12 max-w-3xl mx-auto px-6">
         <a href="blog.html" class="inline-flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-accent transition-colors mb-8">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
-          Back to blog
+          Kembali ke Catatan Project
         </a>
 
         <div class="flex items-center gap-3 mb-5">
-          <span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-2.5 py-1 rounded-full">Design</span>
+          <span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-2.5 py-1 rounded-full">Computer Vision</span>
           <span class="text-xs text-zinc-400">March 8, 2025 · 7 min read</span>
         </div>
 
-        <h1 class="font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white leading-tight mb-6">Why I ditched heavy CSS frameworks for Tailwind — and what changed</h1>
+        <h1 class="font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white leading-tight mb-6">Membangun Sistem Deteksi Botol Minuman Menggunakan YOLO11 dan OCR</h1>
 
-        <p class="text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">After years of fighting specificity wars and unused kilobytes, here's what finally convinced me to make the switch — and the measurable impact it had on both my workflow and my clients' performance scores.</p>
+        <p class="text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">After years of fighting specificity wars and unused kilobytes, here's what finally convinced me to make the switch — and the measurable impact it had on both my workflow and my kolaborator' performance scores.</p>
 
         <!-- Author -->
         <div class="flex items-center gap-4 py-6 border-t border-b border-zinc-100 dark:border-zinc-900">
           <div class="photo-frame w-12 h-12 rounded-full shrink-0">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Eliott" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Gusli Yanza" loading="lazy"/>
           </div>
           <div>
-            <p class="font-medium text-zinc-900 dark:text-white text-sm">Eliott</p>
-            <p class="text-xs text-zinc-500">UI/UX Designer &amp; Frontend Developer</p>
+            <p class="font-medium text-zinc-900 dark:text-white text-sm">Gusli Yanza</p>
+            <p class="text-xs text-zinc-500">Mahasiswa Sistem Komputer</p>
           </div>
           <div class="ml-auto flex gap-3">
             <a href="#" class="w-8 h-8 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:text-accent hover:border-accent transition-colors" aria-label="Share on Twitter">
@@ -161,7 +161,7 @@
         </blockquote>
 
         <h2>What made me give Tailwind a proper shot</h2>
-        <p>I'd dismissed Tailwind for a long time. The utility-class approach looked messy in the HTML, and I was convinced it would make templates unreadable. Then a client asked me to maintain an existing Tailwind project, and I had no choice.</p>
+        <p>I'd dismissed Tailwind for a long time. The utility-class approach looked messy in the HTML, and I was convinced it would make templates unreadable. Then a project asked me to maintain an existing Tailwind project, and I had no choice.</p>
         <p>Two weeks in, I was converted. Here's what changed my mind:</p>
         <ul>
           <li><strong>No context switching.</strong> I stopped bouncing between HTML and CSS files. Everything is right there in the markup.</li>
@@ -171,7 +171,7 @@
         </ul>
 
         <h2>The real-world performance impact</h2>
-        <p>I rebuilt a client's marketing site using Tailwind CSS + Alpine.js, replacing their WordPress + Bootstrap 4 stack. The results after one month were hard to argue with:</p>
+        <p>I rebuilt a project's marketing site using Tailwind CSS + Alpine.js, replacing their WordPress + Bootstrap 4 stack. The results after one month were hard to argue with:</p>
         <ul>
           <li>Lighthouse performance score: <strong>47 → 96</strong></li>
           <li>CSS bundle: <strong>118kb → 7kb</strong></li>
@@ -189,7 +189,7 @@
         <p>The ecosystem has largely caught up here. Headless UI, Flowbite, and Preline cover most of the gaps. And Alpine.js handles the interactivity layer beautifully without adding weight.</p>
 
         <h2>My recommendation</h2>
-        <p>If you're building anything custom — a SaaS product, a portfolio, a landing page — Tailwind is the right tool. The initial learning curve is about a week. After that, you'll ship faster than you ever did before.</p>
+        <p>If you're building anything custom — a AI & IoT product, a portfolio, a landing page — Tailwind is the right tool. The initial learning curve is about a week. After that, you'll ship faster than you ever did before.</p>
         <p>If you need a WordPress theme or a simple brochure site with minimal custom styling, Bootstrap is still perfectly fine. Use the right tool for the job.</p>
 
         <hr/>
@@ -235,7 +235,7 @@
               <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=700&q=80" alt="UX laws" loading="lazy"/>
             </div>
             <div class="p-5">
-              <span class="text-xs text-zinc-400 mb-2 block">Nov 18, 2024 · Design</span>
+              <span class="text-xs text-zinc-400 mb-2 block">Nov 18, 2024 · Computer Vision</span>
               <a href="blog-article.html">
                 <h3 class="font-display font-bold text-base text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">The 7 UX laws every frontend dev should memorise</h3>
               </a>
@@ -251,7 +251,7 @@
 
   <footer class="border-t border-zinc-100 dark:border-zinc-900">
     <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-sm text-zinc-400">© <span id="yr"></span> Eliott. All rights reserved. <br> Developed by <a href="https://lbegey78.gumroad.com/" target="_blank" class="font-bold">Laurent Begey</a> • Distributed by <a href="https://themewagon.com/" target="_blank" class="font-bold">ThemeWagon</a></p>
+      <p class="text-sm text-zinc-400">© <span id="yr"></span> Gusli Yanza. All rights reserved. <br> Developed by <a href="https://lbegey78.gumroad.com/" target="_blank" class="font-bold">Laurent Begey</a> • Distributed by <a href="https://themewagon.com/" target="_blank" class="font-bold">ThemeWagon</a></p>
       <p class="text-xs text-zinc-500">Built with <a href="https://tailwindcss.com" class="hover:text-zinc-900 dark:hover:text-white transition-colors" rel="noopener noreferrer" target="_blank">Tailwind CSS</a> &amp; <a href="https://alpinejs.dev" class="hover:text-zinc-900 dark:hover:text-white transition-colors" rel="noopener noreferrer" target="_blank">Alpine.js</a></p>
     </div>
   </footer>

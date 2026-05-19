@@ -1,25 +1,30 @@
-# Folio— Freelance Portfolio Template (HTML · Tailwind · Alpine.js)
-#### Preview
+# Portfolio Gusli Yanza (HTML · Tailwind CSS · Alpine.js)
 
- - [Demo](https://themewagon.github.io/folio-html/)
+Website portfolio multi-page berbasis template Folio yang sudah disesuaikan menjadi profil **Gusli Yanza**.
 
-#### Download
- - [Download from ThemeWagon](https://themewagon.com/themes/folio-html/)
+## Halaman
+- `index.html` — halaman utama (hero, keahlian, project, tentang, sertifikat/pengalaman, kontak)
+- `projects.html` — daftar lengkap project
+- `case-study.html` — studi kasus Smart Beverage Detection System
+- `blog.html` — Catatan Project
+- `blog-article.html` — artikel utama YOLO11 + OCR
 
-## Getting Started
+## Menjalankan Lokal
+1. Buka folder project.
+2. Jalankan server statis:
+   ```bash
+   python3 -m http.server 8000
+   ```
+3. Buka `http://localhost:8000` di browser.
 
-1. Clone Repository
-```
-git clone https://github.com/themewagon/folio-html.git
-```
+## Profil
+- Nama: Gusli Yanza
+- Role: Mahasiswa Sistem Komputer
+- Email: gusliyanza02@gmail.com
+- GitHub: https://github.com/gusliyanza02
+- Lokasi: Jambi, Indonesia
 
-## Author 
-```
-Design and code is completely written by Laurent Begey and development team. 
-```
-
-## License
-
- - Design and Code is Copyright &copy; <a href="https://lbegey78.gumroad.com/" target="_blank">Laurent Begey</a>
- - Licensed cover under [MIT]
- - Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+## Catatan
+- Pastikan menaruh foto profil di `assets/img/profile.jpg`.
+- Ganti link placeholder bila diperlukan (LinkedIn/WhatsApp).
+- Credit ThemeWagon tetap dipertahankan sesuai lisensi template asli.
