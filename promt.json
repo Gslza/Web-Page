@@ -1,0 +1,400 @@
+{
+  "project_name": "Smart Home IoT 4 Relay Telegram Bot and Web Dashboard",
+  "goal": "Buat sistem Internet of Things smart home sederhana menggunakan ESP32, Telegram Bot, sensor DHT11/DHT22, relay 4 channel, dan web dashboard modern yang bisa di-deploy. Sistem harus dapat mengontrol lampu/perangkat listrik melalui Telegram, web interface, dan perintah suara berbasis text input Telegram.",
+  "important_note": "Web dashboard harus bisa di-deploy secara online. Karena itu jangan hanya menggunakan IP lokal ESP32. Gunakan Firebase Realtime Database atau REST API cloud sebagai penghubung antara ESP32 dan web dashboard agar kontrol relay bisa dilakukan dari Telegram maupun web.",
+  "reference_dashboard_style": {
+    "inspiration": "Smart home admin dashboard modern seperti dashboard themewagon/smart-home, dengan desain clean, card rounded, sidebar, topbar, statistik sensor, kontrol perangkat, dan layout responsif.",
+    "rule": "Jangan menyalin kode asli secara langsung. Buat ulang UI yang original dengan gaya modern dan cocok untuk project IoT."
+  },
+  "system_requirements": {
+    "main_controller": "ESP32 DevKit V1 atau NodeMCU ESP8266, prioritaskan ESP32",
+    "sensor": "DHT11 atau DHT22",
+    "relay": "Relay 4 Channel 5V DC",
+    "output_devices": [
+      "Lampu 1",
+      "Lampu 2",
+      "Lampu 3",
+      "Lampu 4"
+    ],
+    "power": [
+      "Kabel USB",
+      "Adaptor HP atau power bank",
+      "Lampu 5V untuk demo",
+      "Jika menggunakan listrik AC, tambahkan peringatan keselamatan dan gunakan pengawasan teknisi"
+    ],
+    "software": [
+      "Arduino IDE",
+      "UniversalTelegramBot by Brian Lough",
+      "WiFiClientSecure",
+      "DHT Sensor Library",
+      "ArduinoJson",
+      "Firebase ESP Client atau HTTPClient jika menggunakan REST API"
+    ]
+  },
+  "architecture": {
+    "recommended_cloud": "Firebase Realtime Database",
+    "reason": "Firebase memungkinkan ESP32 dan web dashboard saling sinkron secara online. Web dashboard dapat di-deploy ke Replit atau Vercel, sementara ESP32 membaca dan menulis data ke Firebase.",
+    "data_flow": [
+      "Telegram command diterima ESP32 melalui Telegram Bot.",
+      "ESP32 mengubah status relay sesuai perintah.",
+      "ESP32 mengirim status relay, suhu, kelembaban, dan waktu update ke Firebase.",
+      "Web dashboard membaca status dari Firebase.",
+      "Ketika tombol ON/OFF di web ditekan, web menulis perintah ke Firebase.",
+      "ESP32 membaca perubahan perintah dari Firebase lalu mengaktifkan atau mematikan relay.",
+      "ESP32 mengirim notifikasi Telegram saat perangkat aktif atau nonaktif."
+    ]
+  },
+  "firebase_database_schema": {
+    "smart_home": {
+      "relay": {
+        "relay1": false,
+        "relay2": false,
+        "relay3": false,
+        "relay4": false
+      },
+      "sensor": {
+        "temperature": 0,
+        "humidity": 0,
+        "last_update": "2026-05-27 21:00:00"
+      },
+      "esp32": {
+        "status": "offline",
+        "wifi_signal": "unknown",
+        "ip_address": "0.0.0.0"
+      },
+      "command": {
+        "source": "web",
+        "last_command": "",
+        "updated_at": "2026-05-27 21:00:00"
+      }
+    }
+  },
+  "telegram_bot_features": {
+    "required": true,
+    "library": "UniversalTelegramBot",
+    "commands": [
+      {
+        "command": "/start",
+        "function": "Menampilkan menu utama dan daftar perintah"
+      },
+      {
+        "command": "/lampu1_on",
+        "function": "Menyalakan relay/lampu 1"
+      },
+      {
+        "command": "/lampu1_off",
+        "function": "Mematikan relay/lampu 1"
+      },
+      {
+        "command": "/lampu2_on",
+        "function": "Menyalakan relay/lampu 2"
+      },
+      {
+        "command": "/lampu2_off",
+        "function": "Mematikan relay/lampu 2"
+      },
+      {
+        "command": "/lampu3_on",
+        "function": "Menyalakan relay/lampu 3"
+      },
+      {
+        "command": "/lampu3_off",
+        "function": "Mematikan relay/lampu 3"
+      },
+      {
+        "command": "/lampu4_on",
+        "function": "Menyalakan relay/lampu 4"
+      },
+      {
+        "command": "/lampu4_off",
+        "function": "Mematikan relay/lampu 4"
+      },
+      {
+        "command": "/sensor",
+        "function": "Menampilkan suhu dan kelembaban dari sensor DHT11/DHT22"
+      },
+      {
+        "command": "/status",
+        "function": "Menampilkan status semua relay dan status sensor"
+      },
+      {
+        "command": "/all_on",
+        "function": "Menyalakan semua relay"
+      },
+      {
+        "command": "/all_off",
+        "function": "Mematikan semua relay"
+      },
+      {
+        "command": "/variasi1",
+        "function": "Menjalankan pola variasi lampu 1"
+      },
+      {
+        "command": "/variasi2",
+        "function": "Menjalankan pola variasi lampu 2"
+      }
+    ],
+    "voice_command_note": "Perintah suara Telegram yang digunakan adalah voice typing atau speech-to-text dari keyboard HP sehingga pesan yang masuk ke bot tetap berupa teks. Jangan menggunakan voice note audio kecuali ditambahkan sistem speech-to-text khusus.",
+    "text_voice_commands": [
+      "Nyalakan lampu",
+      "Matikan lampu",
+      "Berapa Temperatur",
+      "Berapa Kelembapan",
+      "Nyalakan Variasi 1",
+      "Nyalakan Variasi 2"
+    ],
+    "notifications": [
+      "Kirim notifikasi Telegram saat lampu 1 aktif/nonaktif",
+      "Kirim notifikasi Telegram saat lampu 2 aktif/nonaktif",
+      "Kirim notifikasi Telegram saat lampu 3 aktif/nonaktif",
+      "Kirim notifikasi Telegram saat lampu 4 aktif/nonaktif",
+      "Kirim notifikasi Telegram saat semua relay dimatikan",
+      "Kirim notifikasi Telegram saat variasi lampu dijalankan"
+    ]
+  },
+  "esp32_code_requirements": {
+    "platform": "Arduino IDE",
+    "board": "ESP32 Dev Module",
+    "filename": "smart_home_telegram_web_esp32.ino",
+    "must_include": [
+      "WiFi connection",
+      "WiFiClientSecure",
+      "UniversalTelegramBot",
+      "ArduinoJson",
+      "DHT sensor reading",
+      "4 relay control",
+      "Telegram command handler",
+      "Text-based voice command handler",
+      "Firebase Realtime Database integration or REST API integration",
+      "Send relay and sensor status to cloud database",
+      "Read web dashboard commands from cloud database",
+      "Telegram notification when relay status changes",
+      "Variation Lamp 1",
+      "Variation Lamp 2",
+      "All relay off function",
+      "Web and Telegram synchronization"
+    ],
+    "pin_configuration_default": {
+      "DHT_PIN": 4,
+      "DHT_TYPE": "DHT11",
+      "RELAY_1": 16,
+      "RELAY_2": 17,
+      "RELAY_3": 18,
+      "RELAY_4": 19
+    },
+    "relay_logic": {
+      "type": "Active LOW relay module",
+      "on_value": "LOW",
+      "off_value": "HIGH",
+      "note": "Tambahkan komentar jika modul relay yang digunakan active HIGH maka logika dapat dibalik."
+    },
+    "configuration_placeholders": {
+      "WIFI_SSID": "ISI_NAMA_WIFI",
+      "WIFI_PASSWORD": "ISI_PASSWORD_WIFI",
+      "BOT_TOKEN": "ISI_TOKEN_BOT_TELEGRAM",
+      "CHAT_ID": "ISI_CHAT_ID_TELEGRAM",
+      "FIREBASE_DATABASE_URL": "ISI_URL_FIREBASE",
+      "FIREBASE_AUTH": "ISI_DATABASE_SECRET_ATAU_AUTH_TOKEN"
+    },
+    "variation_1_logic": "Lampu menyala bergantian dari relay 1 sampai relay 4 dengan delay tertentu, lalu semua relay mati.",
+    "variation_2_logic": "Lampu berkedip pola kombinasi, misalnya relay 1 dan 3 ON, relay 2 dan 4 OFF, lalu bergantian beberapa kali.",
+    "code_quality": [
+      "Gunakan fungsi terpisah untuk controlRelay, sendStatusToFirebase, readCommandFromFirebase, handleTelegramCommand, readSensor, variation1, variation2, allOff.",
+      "Tambahkan komentar penjelasan pada setiap bagian kode.",
+      "Hindari penggunaan delay terlalu lama agar Telegram Bot dan web command tetap responsif.",
+      "Gunakan millis untuk pembacaan sensor berkala jika memungkinkan."
+    ]
+  },
+  "web_dashboard_requirements": {
+    "framework": "Next.js",
+    "language": "TypeScript",
+    "styling": "Tailwind CSS",
+    "ui_library": "shadcn/ui atau custom React components",
+    "icons": "lucide-react",
+    "chart": "recharts",
+    "deployment_target": [
+      "Replit",
+      "Vercel"
+    ],
+    "features": [
+      {
+        "name": "Status Relay",
+        "description": "Menampilkan status ON/OFF untuk relay 1 sampai relay 4."
+      },
+      {
+        "name": "Relay Button Control",
+        "description": "Setiap relay memiliki tombol ON/OFF yang mengirim perubahan status ke Firebase/API."
+      },
+      {
+        "name": "Temperature Monitoring",
+        "description": "Menampilkan nilai suhu dari DHT11/DHT22."
+      },
+      {
+        "name": "Humidity Monitoring",
+        "description": "Menampilkan nilai kelembaban dari DHT11/DHT22."
+      },
+      {
+        "name": "Last Update",
+        "description": "Menampilkan waktu pembaruan data terakhir."
+      },
+      {
+        "name": "ESP32 Connection Status",
+        "description": "Menampilkan status ESP32 online/offline, alamat IP, dan sinyal WiFi jika tersedia."
+      },
+      {
+        "name": "Variation Control",
+        "description": "Tambahkan tombol Variasi Lampu 1 dan Variasi Lampu 2."
+      },
+      {
+        "name": "All Off",
+        "description": "Tambahkan tombol untuk mematikan semua relay."
+      },
+      {
+        "name": "Sensor Chart",
+        "description": "Menampilkan grafik suhu dan kelembaban menggunakan data dummy atau data historis."
+      }
+    ],
+    "layout": {
+      "sidebar": [
+        "Dashboard",
+        "Devices",
+        "Sensor",
+        "Automation",
+        "Report",
+        "Settings"
+      ],
+      "topbar": [
+        "Search bar",
+        "Notification icon",
+        "ESP32 status badge",
+        "User profile"
+      ],
+      "main_sections": [
+        "Welcome smart home card",
+        "Temperature card",
+        "Humidity card",
+        "Relay control cards",
+        "Variation control card",
+        "Realtime status section",
+        "Sensor chart",
+        "Recent activity log"
+      ]
+    },
+    "api_or_firebase": {
+      "preferred": "Firebase Realtime Database",
+      "web_read": "Read relay status, sensor data, ESP32 status, and last update from Firebase.",
+      "web_write": "Write relay control and variation command to Firebase.",
+      "fallback_api_routes": [
+        {
+          "route": "/api/status",
+          "method": "GET",
+          "function": "Mengambil status relay, sensor, dan ESP32."
+        },
+        {
+          "route": "/api/relay",
+          "method": "POST",
+          "function": "Mengubah status relay."
+        },
+        {
+          "route": "/api/variation",
+          "method": "POST",
+          "function": "Menjalankan variasi lampu 1 atau 2."
+        },
+        {
+          "route": "/api/all-off",
+          "method": "POST",
+          "function": "Mematikan semua relay."
+        }
+      ]
+    }
+  },
+  "web_ui_design": {
+    "theme": "Modern smart home dashboard",
+    "style": "Clean, professional, minimalis, rounded card, soft shadow, responsive",
+    "color_palette": [
+      "white",
+      "soft gray",
+      "blue accent",
+      "green for active",
+      "red or orange for inactive/warning"
+    ],
+    "responsive": true,
+    "mobile_friendly": true,
+    "must_look_premium": true
+  },
+  "report_pdf_requirements": {
+    "create_report": true,
+    "format": "PDF",
+    "title": "Laporan Quis Sistem Smart Home Berbasis IoT Menggunakan ESP32, Telegram Bot, dan Web Dashboard",
+    "sections": [
+      {
+        "number": 1,
+        "title": "Flowchart Sistem",
+        "content": "Buat flowchart alur sistem dari mulai koneksi WiFi, pembacaan sensor, penerimaan perintah Telegram/web, kontrol relay, update database, hingga notifikasi Telegram."
+      },
+      {
+        "number": 2,
+        "title": "Blok Diagram Sistem",
+        "content": "Buat blok diagram yang menampilkan ESP32 sebagai pusat kontrol, DHT11/DHT22 sebagai input sensor, Telegram Bot dan Web Dashboard sebagai input kontrol, Firebase/API sebagai cloud, serta relay 4 channel dan lampu sebagai output."
+      },
+      {
+        "number": 3,
+        "title": "Metode Manajemen Proyek TIK yang Digunakan",
+        "content": "Gunakan metode SDLC dengan tahapan analisis kebutuhan, desain sistem, implementasi, pengujian, deployment, dan maintenance."
+      },
+      {
+        "number": 4,
+        "title": "Estimasi Biaya Proyek",
+        "content": "Buat tabel estimasi biaya perangkat keras dan perangkat lunak. Gunakan harga kisaran Indonesia."
+      },
+      {
+        "number": 5,
+        "title": "Estimasi Lama Pengerjaan",
+        "content": "Buat tabel estimasi waktu pengerjaan dari perancangan, pembelian alat, perakitan, coding ESP32, pembuatan web dashboard, pengujian, dan laporan."
+      },
+      {
+        "number": 6,
+        "title": "Source Code Arduino IDE, Web Dashboard, dan Foto Rangkaian",
+        "content": "Sediakan bagian untuk source code ESP32 Arduino IDE, struktur source code web dashboard, link deployment web, dan placeholder foto rangkaian."
+      }
+    ],
+    "assessment_alignment": {
+      "Blok diagram & Flowchart": "20%",
+      "Coding Telegram Bot": "20%",
+      "Web Interface": "20%",
+      "Opsi Variasi": "20%",
+      "Dokumentasi laporan": "20%"
+    }
+  },
+  "expected_outputs": [
+    "Source code ESP32 lengkap untuk Arduino IDE.",
+    "Source code web dashboard Next.js lengkap.",
+    "Instruksi install dependencies.",
+    "Instruksi membuat Telegram Bot melalui BotFather.",
+    "Instruksi mendapatkan CHAT_ID.",
+    "Instruksi setup Firebase Realtime Database.",
+    "Instruksi deploy web dashboard ke Replit atau Vercel.",
+    "Flowchart sistem dalam bentuk Mermaid.",
+    "Blok diagram sistem dalam bentuk Mermaid.",
+    "Laporan PDF lengkap sesuai ketentuan quiz.",
+    "Tabel estimasi biaya proyek.",
+    "Tabel estimasi lama pengerjaan.",
+    "Penjelasan cara kerja sistem."
+  ],
+  "installation_commands": {
+    "web_dashboard": [
+      "npm install",
+      "npm run dev"
+    ],
+    "replit_run_command": "npm run dev -- -H 0.0.0.0",
+    "arduino_libraries": [
+      "UniversalTelegramBot by Brian Lough",
+      "ArduinoJson",
+      "DHT sensor library",
+      "Adafruit Unified Sensor",
+      "Firebase ESP Client atau gunakan HTTPClient"
+    ]
+  },
+  "safety_warning": "Jika menggunakan lampu AC 220V, jangan menyentuh kabel listrik saat alat menyala. Gunakan box pelindung, isolasi kabel dengan benar, dan minta pengawasan orang yang memahami instalasi listrik. Untuk demo kampus lebih aman menggunakan lampu DC 5V.",
+  "final_instruction_for_ai": "Buat semua kode secara lengkap dan rapi. Jangan hanya memberikan konsep. Hasil akhir harus memiliki kode ESP32 Arduino IDE, kode web dashboard Next.js, dokumentasi setup, flowchart, blok diagram, estimasi biaya, estimasi waktu, dan struktur laporan PDF."
+}
